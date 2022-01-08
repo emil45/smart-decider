@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 import { Grid, ThemeProvider, Button, Dialog, DialogTitle, DialogContent, Typography } from '@mui/material';
 import theme from '../theme';
 import Head from 'next/head';
-import Card from './components/card';
-import { CardInfo } from './models/cards';
-import { getRandomInt, getRandomItemFromArray } from './utils';
+import Card from '../components/card';
+import { CardInfo } from '../models/cards';
+import { getRandomInt, getRandomItemFromArray } from '../common/utils';
 
 const initialValues = [
 	{ id: 1, name: 'Option 1', value: 50 },
