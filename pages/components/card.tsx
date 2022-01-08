@@ -8,7 +8,8 @@ interface CardProps {
 }
 
 export default function Card(props: CardProps) {
-	const handleTextChange = (event: { target: HTMLInputElement }) => {
+	// TODO: Fix event type
+	const handleTextChange = (event: any) => {
 		props.onChange({
 			id: props.cardInfo.id,
 			name: event.target.value,
@@ -16,7 +17,7 @@ export default function Card(props: CardProps) {
 		});
 	};
 
-	const handleSliderChange = (event: { target: HTMLInputElement }) => {
+	const handleSliderChange = (event: any) => {
 		props.onChange({
 			id: props.cardInfo.id,
 			name: props.cardInfo.name,
