@@ -6,7 +6,6 @@ import Head from 'next/head';
 import Card from '../components/card';
 import { CardInfo } from '../models/cards';
 import { getRandomInt, getRandomItemFromArray } from '../common/utils';
-import { ConstructionOutlined } from '@mui/icons-material';
 
 const initialValues = [
 	{ id: 1, name: 'Option 1', value: 50 },
@@ -37,7 +36,7 @@ export default function Home() {
 		const randomCard = getRandomItemFromArray(cards);
 		const minValue = Math.min(...cards.map((c) => c.value));
 		const maxValue = Math.max(...cards.map((c) => c.value));
-		console.log(`Calculating odds. Random: ${random}, MinValue: ${minValue}, MaxValue: ${maxValue}`);
+		console.log(`Calculating odds. Random: ${random}, MinValue: ${minValue}, MaxValue: ${maxValue}, RandomCard: ${randomCard.name}`);
 
 		if (minValue === maxValue) {
 			setWinnerCard(randomCard);
