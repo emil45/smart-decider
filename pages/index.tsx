@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
-import { Grid, ThemeProvider, Button, Dialog, DialogTitle, DialogContent, Typography } from '@mui/material';
+import { Grid, ThemeProvider, Button, Dialog, DialogTitle, DialogContent, Typography, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import theme from '../theme';
 import Head from 'next/head';
 import Card from '../components/card';
 import { CardInfo } from '../models/cards';
 import { getRandomInt, getRandomItemFromArray } from '../common/utils';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const initialValues = [
 	{ id: 1, name: 'Option 1', value: 50 },
@@ -32,10 +34,10 @@ export default function Home() {
 
 	const calculateOdds = () => {
 		const random = getRandomInt(1, 100);
-		console.log(`The number random is ${random}`);
 		const randomCard = getRandomItemFromArray(cards);
 		const minValue = Math.min(...cards.map((c) => c.value));
 		const maxValue = Math.max(...cards.map((c) => c.value));
+		console.log(`Calculating odds. Random: ${random}, MinValue: ${minValue}, MaxValue: ${maxValue}`);
 
 		if (minValue === maxValue) {
 			setWinnerCard(randomCard);
@@ -48,9 +50,23 @@ export default function Home() {
 
 	if (winnerCard) {
 		return (
-			<Dialog open={true} onClose={handleDialogClose}>
-				<DialogTitle>Winner 🥳</DialogTitle>
-				<DialogContent>{winnerCard.name}</DialogContent>
+			<Dialog open={true} onClose={handleDialogClose} fullWidth maxWidth={'xs'}>
+				<DialogTitle>
+					<Typography>The Winner 🥳</Typography>
+					<IconButton
+						aria-label="close"
+						onClick={handleDialogClose}
+						sx={{
+							position: 'absolute',
+							right: 8,
+							top: 8,
+							color: (theme) => theme.palette.grey[500]
+						}}
+					>
+						<CloseIcon />
+					</IconButton>
+				</DialogTitle>
+				<DialogContent dividers>{winnerCard.name}</DialogContent>
 			</Dialog>
 		);
 	}
@@ -61,16 +77,16 @@ export default function Home() {
 				<title>Smartie</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Grid container spacing={4} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '100vh' }}>
-				<Grid item>
+			<Grid container direction="column" alignItems="center" justifyContent="center">
+				<Grid item marginY={4}>
 					<Card cardInfo={cards[0]} onChange={onCardChange} />
 				</Grid>
-				<Grid item>
+				<Grid item marginBottom={4}>
 					<Card cardInfo={cards[1]} onChange={onCardChange} />
 				</Grid>
-				<Grid item marginBottom={4}>
+				<Grid item>
 					<Button variant="contained" onClick={calculateOdds}>
-						Smartie
+						Decide
 					</Button>
 				</Grid>
 			</Grid>
