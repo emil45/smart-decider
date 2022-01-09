@@ -49,27 +49,24 @@ export default function Card(props: CardProps) {
 	};
 
 	return (
-		<MuiCard sx={{ maxWidth: 345 }}>
+		<MuiCard>
 			<CardContent>
 				<TextField label={props.cardInfo.name} variant="standard" sx={{ mb: 4 }} onChange={handleTextChange} />
 				<Grid container spacing={2} alignItems="center">
 					<Grid item xs>
-						<Slider valueLabelDisplay="auto" value={props.cardInfo.value} aria-labelledby="input-slider" onChange={handleSliderChange} />
+						<Slider value={props.cardInfo.value} aria-labelledby="input-slider" onChange={handleSliderChange} min={1} max={100} />
 					</Grid>
 					<Grid item>
 						<Input
 							value={props.cardInfo.value}
 							size="small"
 							onChange={handleInputChange}
-							// onBlur={handleBlur}
+							onBlur={handleBlur}
 							inputProps={{
 								min: 1,
 								max: 100,
 								type: 'number',
-								'aria-labelledby': 'input-slider',
-								onKeyDown: (event) => {
-									event.preventDefault();
-								}
+								'aria-labelledby': 'input-slider'
 							}}
 						/>
 					</Grid>
